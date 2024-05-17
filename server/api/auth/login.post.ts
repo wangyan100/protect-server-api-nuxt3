@@ -19,7 +19,6 @@ export default defineEventHandler(async (event) => {
     avatar: faker.image.avatarLegacy(),
   };
 
-  console.log('user->', user)
   /**
    * In a real app, you should reach out to DB/external auth service to fetch the user and validate the different stuff
    */
