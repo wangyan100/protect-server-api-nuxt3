@@ -11,7 +11,13 @@ export default defineEventHandler(async (event) => {
     // if the pathname is in the list of protected routes
     if (pathname === r) {
       // ensure user is logged in before getting a response
+      try{
       await requireUserSession(event);
+      }catch(err){
+        const target = encodeURIComponent(event.req.url);
+        event.res.writeHead(302, { Location: `/login?target=${target}` });
+        event.res.end();
+      }
     }
   }
 });

@@ -1,17 +1,17 @@
 <template>
     <div>
         <UiContainer as="section" class="max-w-4xl py-5">
-            <form @submit.prevent="login">
-                <div class="form-group">
-                    <label class="m-2" for="username">Username</label>
-                    <input class="m-2" v-model="username" type="text" id="username" required />
-                </div>
-                <div class="form-group">
-                    <label class="m-2" for="password">Password</label>
-                    <input class="m-2" v-model="password" type="password" id="password" required />
-                </div>
-                <button type="submit">Login</button>
-            </form>
+            <div class="form-group">
+                <label class="m-2" for="username">Username</label>
+                <input class="m-2" v-model="username" type="text" id="username" required />
+            </div>
+            <div class="form-group">
+                <label class="m-2" for="password">Password</label>
+                <input class="m-2" v-model="password" type="password" id="password" required />
+            </div>
+            <button @click="handleSignIn">Sign In</button>
+
+            <p v-if="errorMessage">{{ errorMessage }}</p>
         </UiContainer>
     </div>
 </template>
@@ -22,24 +22,37 @@ import { useRouter } from 'vue-router';
 
 const username = ref('');
 const password = ref('');
+const errorMessage = ref('');
 const router = useRouter();
+
+async function handleSignIn() {
+    try {
+        await useAuthStore().signIn(username.value, password.value);
+        const target = router.currentRoute.value.query.target as string ?? '/'
+        console.log('Signed in successfully, target->', target);
+        await router.push(target)
+    } catch (error) {
+        let temperror = error as any
+        errorMessage.value = temperror.message;
+        console.error('Sign-in error:', error);
+    }
+}
 
 const login = async () => {
     try {
+
         useAuthStore().signIn(username.value, password.value)
+        console.log("### submit login is called ###", useAuthStore().loggedIn)
         // Handle successful login, e.g., navigate to another page
-        if (useAuthStore().loggedIn) {
-            console.log('Login successful:');
-            const target = router.currentRoute.value.query.target as string ?? '/'
-            await router.push(target)
-        } else {
-            console.log('Login failed:');
-            await router.push('/')
-        }
+
+        const target = router.currentRoute.value.query.target as string ?? '/'
+        console.log('Login successful , target ', target);
+        await router.push(target)
         // Change to your desired route
     } catch (error) {
         console.error('Login failed:', error);
-        router.push('/error');
+        //  await router.push('/')
+        await router.push('/error')
         // Handle login failure, e.g., show an error message
     }
 };
