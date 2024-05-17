@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "nuxt-icon",
     "@pinia/nuxt",
     "nuxt-auth-utils",
+    "@nuxt/eslint"
   ],
 
   tailwindcss: { exposeConfig: true },
