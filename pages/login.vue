@@ -28,7 +28,7 @@ const login = async () => {
     try {
         useAuthStore().signIn(username.value, password.value)
         // Handle successful login, e.g., navigate to another page
-        if (useAuthStore().loggedIn.value) {
+        if (useAuthStore().loggedIn) {
             console.log('Login successful:');
             const target = router.currentRoute.value.query.target as string ?? '/'
             await router.push(target)
