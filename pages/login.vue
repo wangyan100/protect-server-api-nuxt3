@@ -38,24 +38,6 @@ async function handleSignIn() {
     }
 }
 
-const login = async () => {
-    try {
-
-        useAuthStore().signIn(username.value, password.value)
-        console.log("### submit login is called ###", useAuthStore().loggedIn)
-        // Handle successful login, e.g., navigate to another page
-
-        const target = router.currentRoute.value.query.target as string ?? '/'
-        console.log('Login successful , target ', target);
-        await router.push(target)
-        // Change to your desired route
-    } catch (error) {
-        console.error('Login failed:', error);
-        //  await router.push('/')
-        await router.push('/error')
-        // Handle login failure, e.g., show an error message
-    }
-};
 </script>
 
 <style scoped>
