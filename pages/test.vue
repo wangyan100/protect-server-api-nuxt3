@@ -5,3 +5,14 @@
         </UiContainer>
     </div>
 </template>
+<script setup lang="ts">
+definePageMeta({
+    middleware: async (to) => {
+        console.log(to)
+        const { loggedIn, user, session, clear, fetch } = useUserSession();
+        if (loggedIn.value === false) {
+            return `/login?target=${to.path}`
+        }
+    },
+})
+</script>
