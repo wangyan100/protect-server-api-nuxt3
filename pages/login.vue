@@ -41,7 +41,6 @@ async function handleSignIn() {
         console.log('after signIn ,loggedIn ->', loggedIn.value)
     }
 }
-
 </script>
 
 <style scoped>
