@@ -26,8 +26,11 @@ const errorMessage = ref('');
 const router = useRouter();
 
 async function handleSignIn() {
+    const { loggedIn, user, session, clear, fetch } = useUserSession();
     try {
+        console.log('before signIn ,loggedIn ->', loggedIn.value)
         await useAuthStore().signIn(username.value, password.value);
+        console.log('after signIn ,loggedIn ->', loggedIn.value)
         const target = router.currentRoute.value.query.target as string ?? '/'
         console.log('Signed in successfully, target->', target);
         await router.push(target)
@@ -35,6 +38,7 @@ async function handleSignIn() {
         let temperror = error as any
         errorMessage.value = temperror.message;
         console.error('Sign-in error:', error);
+        console.log('after signIn ,loggedIn ->', loggedIn.value)
     }
 }
 
