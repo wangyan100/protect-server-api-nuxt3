@@ -28,9 +28,14 @@ const login = async () => {
     try {
         useAuthStore().signIn(username.value, password.value)
         // Handle successful login, e.g., navigate to another page
-        console.log('Login successful:');
-        const target = router.currentRoute.value.query.target as string ?? '/'
-        await router.push(target)
+        if (useAuthStore().loggedIn.value) {
+            console.log('Login successful:');
+            const target = router.currentRoute.value.query.target as string ?? '/'
+            await router.push(target)
+        } else {
+            console.log('Login failed:');
+            await router.push('/')
+        }
         // Change to your desired route
     } catch (error) {
         console.error('Login failed:', error);
