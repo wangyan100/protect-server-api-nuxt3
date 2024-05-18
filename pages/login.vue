@@ -7,7 +7,11 @@
             </div>
             <div class="flex flex-row gap-2 w-64">
                 <UiLabel class="m-2" for="password">Password</UiLabel>
-                <UiInput class="m-2" v-model="password" type="password" id="password" required />
+                <UiInput class="m-2 " v-model="password" :type="showPassword ? 'text' : 'password'" id="password"
+                    required />
+                <span @click="togglePasswordVisibility" class="mt-3">
+                    <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                </span>
             </div>
             <div class="flex gap-2 ">
                 <UiButton @click="handleSignIn">Sign In</UiButton>
@@ -24,10 +28,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import '@fortawesome/fontawesome-free/css/all.css'; // Import Font Awesome CSS
+
 
 const username = ref('');
 const password = ref('');
 const errorMessage = ref('');
+const showPassword = ref(false);
+
+const togglePasswordVisibility = () => {
+    showPassword.value = !showPassword.value;
+};
 const router = useRouter();
 
 async function handleSignIn() {
@@ -51,6 +62,4 @@ async function handleSignIn() {
 }
 </script>
 
-<style scoped>
-/* Add your styles here */
-</style>
+<style scoped></style>
