@@ -5,7 +5,11 @@
 
 - page/login.vue's handleSignin() -> stores/auth.ts signIn --> server/api/auth/login.post.ts 
 
-- middleware (server/middleware/guard.ts) guard to check any URLs need to projection or not 
+- page/index.vue click loadData -> stores/users.ts loadData -> server/api/users/index.get.ts , this will be checkd by server middleware 
+- page/test or page/test2 -> it will be checked by  route middleware
+
+- server middleware (server/middleware/serverguard.ts)  to check if calling any backend API is allowed or not 
+- route middleware (middlewares/auth.ts), to check if any frontend page nivigation is allowed or not 
 
 #### useful nuxt function
 

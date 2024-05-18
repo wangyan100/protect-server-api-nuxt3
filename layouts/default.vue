@@ -8,10 +8,10 @@
             size="icon-sm">
             <Icon name="lucide:sun-medium" class="h-4 w-4" />
           </UiButton>
-          <UiButton @click="navigateToTest" variant="outline" size="sm">
+          <UiButton @click="$router.push('/test')" variant="outline" size="sm">
             Test
           </UiButton>
-          <UiButton @click="navigateToTest2" variant="outline" size="sm">
+          <UiButton @click="$router.push('/test2')" variant="outline" size="sm">
             Test2
           </UiButton>
           <UiButton v-if="!useAuthStore().loggedIn" @click="navigateToSignIn" variant="outline" size="sm">
@@ -37,11 +37,4 @@ const navigateToSignIn = () => {
   router.push('/login')
 }
 
-const navigateToTest = () => {
-  router.push('/test')
-}
-
-const navigateToTest2 = () => {
-  router.push('/test2')
-}
 </script>

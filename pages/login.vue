@@ -34,10 +34,9 @@ async function handleSignIn() {
         const target = router.currentRoute.value.query.target as string ?? '/'
         console.log('Signed in successfully, target->', target);
         await router.push(target)
-    } catch (error) {
-        let temperror = error as any
-        errorMessage.value = temperror.message;
-        console.error('Sign-in error:', error);
+    } catch (error: any) {
+        errorMessage.value = error.message + ', try again!';
+        console.error('error statusCode->', error.statusCode);
         console.log('after signIn ,loggedIn ->', loggedIn.value)
     }
 }

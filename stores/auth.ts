@@ -11,9 +11,13 @@ export const useAuthStore = defineStore("Auth", () => {
       });
       await fetch();
       console.log("#### useAuthStore signIn is called, loggedIn-> ", loggedIn.value);
-    } catch (error) {
+    } catch (error: any) {
       console.error("#### useAuthStore signIn error-> ", error);
-      throw new Error("Failed to sign in");
+      // Throw a 401 error
+      const authError = new Error("Unauthorized") as any;
+      authError.name = "UnauthorizedError";
+      authError.statusCode = 401;
+      throw authError;
     }
   };
 
