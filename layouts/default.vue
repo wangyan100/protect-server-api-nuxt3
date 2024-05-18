@@ -2,6 +2,9 @@
   <div>
     <UiNavbar sticky>
       <UiContainer class="flex h-14 items-center justify-between">
+        <UiButton @click="$router.push('/')" variant="outline" size="sm">
+          Home
+        </UiButton>
         <p class="text-lg font-semibold">Protect API</p>
         <div class="flex items-center gap-2">
           <UiButton @click="$colorMode.preference = $colorMode.value == 'dark' ? 'light' : 'dark'" variant="ghost"
@@ -11,7 +14,7 @@
           <UiButton @click="$router.push('/test')" variant="outline" size="sm">
             Test
           </UiButton>
-          <UiButton @click="$router.push('/test2')" variant="outline" size="sm">
+          <UiButton @click="navigateTo('/test2')" variant="outline" size="sm">
             Test2
           </UiButton>
           <UiButton v-if="!useAuthStore().loggedIn" @click="navigateToSignIn" variant="outline" size="sm">
