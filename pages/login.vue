@@ -1,11 +1,11 @@
 <template>
     <div>
         <UiContainer as="section" class="max-w-4xl py-5">
-            <div class="flex  gap-2 w-64">
+            <div class="flex flex-row gap-2 w-64">
                 <UiLabel class="m-2 " for="username">Username</UiLabel>
                 <UiInput class="m-2" v-model="username" type="text" id="username" required />
             </div>
-            <div class="flex  gap-2 w-64">
+            <div class="flex flex-row gap-2 w-64">
                 <UiLabel class="m-2" for="password">Password</UiLabel>
                 <UiInput class="m-2" v-model="password" type="password" id="password" required />
             </div>
@@ -32,6 +32,10 @@ const router = useRouter();
 
 async function handleSignIn() {
     const { loggedIn, user, session, clear, fetch } = useUserSession();
+    if (!username.value || !password.value) {
+        errorMessage.value = 'Both username and password are required';
+        return;
+    }
     try {
         console.log('before signIn ,loggedIn ->', loggedIn.value)
         await useAuthStore().signIn(username.value, password.value);

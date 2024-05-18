@@ -33,11 +33,8 @@
                 </div>
               </UiTableCell>
               <UiTableCell>
-                <a
-                  class="text-muted-foreground underline decoration-sky-400 underline-offset-2 transition hover:text-sky-500"
-                  :href="`mailto:${user.email}`"
-                  >{{ user.email }}</a
-                >
+                <a class="text-muted-foreground underline decoration-sky-400 underline-offset-2 transition hover:text-sky-500"
+                  :href="`mailto:${user.email}`">{{ user.email }}</a>
               </UiTableCell>
             </UiTableRow>
           </UiTableBody>
@@ -48,17 +45,23 @@
 </template>
 
 <script lang="ts" setup>
-  const { users } = storeToRefs(useUsersStore());
-  const { loadData } = useUsersStore();
-  const headers = ["ID", "Name", "Email"];
+const { users } = storeToRefs(useUsersStore());
+const { loadData } = useUsersStore();
+const headers = ["ID", "Name", "Email"];
 
-  useHead({
-    title: "Users",
-    meta: [
-      {
-        name: "description",
-        content: "Manage users here",
-      },
-    ],
-  });
+useHead({
+  title: "Users",
+  meta: [
+    {
+      name: "description",
+      content: "Manage users here",
+    },
+  ],
+});
+
+const { loggedIn, user, session, clear, fetch } = useUserSession();
+
+(user.value as any)?.name
+
+console.log('### index.vue loggedIn->', loggedIn.value, '  -- user-->', user.value, ' (user.value as any)?.name ->', (user.value as any)?.name)
 </script>
