@@ -1,15 +1,20 @@
 <template>
     <div>
         <UiContainer as="section" class="max-w-4xl py-5">
-            <div class="form-group">
-                <label class="m-2" for="username">Username</label>
-                <input class="m-2" v-model="username" type="text" id="username" required />
+            <div class="flex  gap-2 w-64">
+                <UiLabel class="m-2 " for="username">Username</UiLabel>
+                <UiInput class="m-2" v-model="username" type="text" id="username" required />
             </div>
-            <div class="form-group">
-                <label class="m-2" for="password">Password</label>
-                <input class="m-2" v-model="password" type="password" id="password" required />
+            <div class="flex  gap-2 w-64">
+                <UiLabel class="m-2" for="password">Password</UiLabel>
+                <UiInput class="m-2" v-model="password" type="password" id="password" required />
             </div>
-            <button @click="handleSignIn">Sign In</button>
+            <div class="flex gap-2 ">
+                <UiButton @click="handleSignIn">Sign In</UiButton>
+            </div>
+            <div class="flex w-full items-center gap-2 m-4">
+                <UiDivider />
+            </div>
 
             <p v-if="errorMessage">{{ errorMessage }}</p>
         </UiContainer>
